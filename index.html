@@ -104,52 +104,42 @@ ctx.clearRect(0,0,1080,1920);
 
 ctx.drawImage(foto,0,0,1080,1920);
 
-ctx.fillStyle="rgba(0,45,140,0.65)";
-ctx.fillRect(0,1200,1080,720);
+const marco = new Image();
+
+marco.onload = function(){
+
+ctx.drawImage(marco,0,0,1080,1920);
 
 ctx.fillStyle="white";
 ctx.textAlign="center";
 
-ctx.font="bold 70px Arial";
+ctx.font="bold 65px Arial";
 
 ctx.fillText(
-"SOY "+nombre.toUpperCase(),
+"SOY " + nombre.toUpperCase() + " Y MI",
 540,
-1450
+1380
 );
 
 ctx.fillText(
-"Y MI VOTO ES POR",
+"VOTO ES POR LA FÓRMULA",
 540,
-1540
+1470
 );
 
 ctx.fillText(
-"LA FÓRMULA QUE",
+"QUE LE SUMA AL PAÍS",
 540,
-1630
-);
-
-ctx.fillText(
-"LE SUMA AL PAÍS",
-540,
-1720
-);
-
-ctx.font="bold 95px Arial";
-
-ctx.fillStyle="#ffffff";
-
-ctx.fillText(
-"ES PALOMA AHORA",
-540,
-1840
+1560
 );
 
 document.getElementById("descargar").style.display="block";
 
 };
 
+marco.src="marco.png";
+
+};
 foto.src=e.target.result;
 
 };
