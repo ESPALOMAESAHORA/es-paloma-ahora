@@ -84,7 +84,6 @@ const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 
 const nombre=document.getElementById("nombre").value;
-
 const archivo=document.getElementById("foto").files[0];
 
 if(!archivo){
@@ -102,44 +101,74 @@ foto.onload=function(){
 
 ctx.clearRect(0,0,1080,1920);
 
-ctx.drawImage(foto,0,0,1080,1920);
+// Ajustar la foto sin deformarla
+const escala=Math.max(
+1080/foto.width,
+1920/foto.height
+);
 
-const marco = new Image();
+const nuevoAncho=foto.width*escala;
+const nuevoAlto=foto.height*escala;
 
-marco.onload = function(){
+const x=(1080-nuevoAncho)/2;
+const y=(1920-nuevoAlto)/2;
 
-ctx.drawImage(marco,0,0,1080,1920);
+ctx.drawImage(
+foto,
+x,
+y,
+nuevoAncho,
+nuevoAlto
+);
+
+const marco=new Image();
+
+marco.onload=function(){
+
+ctx.drawImage(
+marco,
+0,
+0,
+1080,
+1920
+);
 
 ctx.fillStyle="white";
 ctx.textAlign="center";
-
-ctx.font="bold 65px Arial";
+ctx.font="bold 62px Arial";
 
 ctx.fillText(
-"SOY " + nombre.toUpperCase() + " Y MI",
+"SOY " + nombre.toUpperCase(),
 540,
 1380
 );
 
 ctx.fillText(
-"VOTO ES POR LA FÓRMULA",
+"Y MI VOTO ES POR",
 540,
-1470
+1460
 );
 
 ctx.fillText(
-"QUE LE SUMA AL PAÍS",
+"LA FÓRMULA QUE",
 540,
-1560
+1540
+);
+
+ctx.fillText(
+"LE SUMA AL PAÍS",
+540,
+1620
 );
 
 document.getElementById("descargar").style.display="block";
 
 };
 
-marco.src="marco.png";
+marco.src="./marco.png?v=" + Date.now();
 
 };
+
 foto.src=e.target.result;
 
 };
@@ -147,6 +176,7 @@ foto.src=e.target.result;
 lector.readAsDataURL(archivo);
 
 }
+
 
 document.getElementById("descargar").onclick=function(){
 
